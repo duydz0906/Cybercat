@@ -5,3 +5,5 @@ python-dotenv
 PyNaCl>=1.5.0
 lyricsgenius
 flask
+ffmpeg-python
+imageio-ffmpeg
