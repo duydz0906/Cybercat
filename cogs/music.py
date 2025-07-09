@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 import yt_dlp
-import asyncio
 import logging
 from utils.youtube import is_youtube_url, search_youtube
 from utils.storage import load_queue, save_queue
