@@ -21,15 +21,9 @@ bot = commands.Bot(
     application_id=APP_ID
 )
 
-# Sự kiện khi bot đã sẵn sàng
 @bot.event
 async def on_ready():
     print(f"✅ Logged in as {bot.user}")
-    try:
-        synced = await bot.tree.sync()
-        print(f"🌐 Synced {len(synced)} slash commands.")
-    except Exception as e:
-        print(f"❌ Sync error: {e}")
 
 @bot.event
 async def on_disconnect():
@@ -39,7 +33,7 @@ async def on_disconnect():
 async def on_resumed():
     print("🔄 Bot reconnected")
 
-# Hàm chính load các Cog
+# Hàm chính load các Cog và sync slash commands
 async def main():
     extensions = [
         "cogs.music",
@@ -61,6 +55,13 @@ async def main():
             print(f"✅ Loaded {ext}")
         except Exception as e:
             print(f"❌ Failed to load {ext}: {e}")
+
+    # 👉 Sync slash commands sau khi đã load đầy đủ các Cog
+    try:
+        synced = await bot.tree.sync()
+        print(f"🌐 Synced {len(synced)} slash commands.")
+    except Exception as e:
+        print(f"❌ Sync error: {e}")
 
     await bot.start(TOKEN)
 
